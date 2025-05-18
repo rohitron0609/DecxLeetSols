@@ -10,8 +10,7 @@ class Solution {
             sol.add(new ArrayList<>(temp));
         }
         for(int i = 0; i < nums.length; i++){
-            if(temp.contains(nums[i]))
-                continue;
+            if(temp.contains(nums[i])) continue;
             temp.add(nums[i]);
             helper(nums, sol, temp);
             temp.remove(temp.size()-1);
