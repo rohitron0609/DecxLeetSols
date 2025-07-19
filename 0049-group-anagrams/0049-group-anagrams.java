@@ -2,21 +2,19 @@ class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> sol = new ArrayList<>();
         Map<String, List<String>> mp = new HashMap<>();
-        for(String s : strs){
-            int[] temp = createFreq(s);
-            String t = Arrays.toString(temp);
-            mp.putIfAbsent(t, new ArrayList<>());
-            mp.get(t).add(s);
+        for(int i = 0; i < strs.length; i++){
+            String s = freqMap(strs[i]);
+            mp.putIfAbsent(s, new ArrayList<>());
+            mp.get(s).add(strs[i]);
         }
         sol.addAll(mp.values());
         return sol;
     }
-
-    int[] createFreq(String s){
-        int[] freq = new int[26];
+    String freqMap(String s){
+        int[] freqMap = new int[26];
         for(int i = 0; i < s.length(); i++){
-            freq[s.charAt(i) - 'a']++;
+            freqMap[s.charAt(i)-'a']++;
         }
-        return freq;
+        return Arrays.toString(freqMap);
     }
 }
