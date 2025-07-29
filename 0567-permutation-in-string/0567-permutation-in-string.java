@@ -5,6 +5,7 @@ class Solution {
         int[] freqS1 = new int[26];
         int[] freqWindow = new int[26];
 
+        if(l1 > l2) return false;
         for(int i = 0; i < l1; i++){
             freqS1[s1.charAt(i)-'a']++;
             freqWindow[s2.charAt(i)-'a']++;
