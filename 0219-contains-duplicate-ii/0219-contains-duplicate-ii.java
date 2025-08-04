@@ -5,9 +5,10 @@ class Solution {
             if(st.contains(nums[i]))
                 return true;
             st.add(nums[i]);
-            if(st.size() > k)
+            if(st.size()>k){
                 st.remove(nums[i-k]);
-        }
+            }
+        }        
         return false;
     }
 }
