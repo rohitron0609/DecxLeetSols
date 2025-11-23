@@ -1,45 +1,32 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int left = leftMost(nums, target);
-        int right = rightMost(nums, target);
-        return new int[]{left,right};
-    }
-    int leftMost(int[] nums, int target){
-        int l = 0;
-        int r = nums.length-1;
-        int sol = -1;
-        while(l <= r){
-            int mid = l + (r-l)/2;
-            if(nums[mid] == target){
-                sol = mid;
-                r = mid-1;
-            }
-            if(nums[mid] < target){
-                l = mid+1;
-            }
-            if(nums[mid] > target){
-                r = mid-1;
-            }
-        }
+        int[] sol = new int[2];
+        sol[0] = lowerBound(nums, target);
+        sol[1] = upperBound(nums, target);
         return sol;
     }
-    int rightMost(int[] nums, int target){
-        int l = 0;
-        int r = nums.length-1;
-        int sol = -1;
-        while(l <= r){
-            int mid = l + (r-l)/2;
-            if(nums[mid] == target){
-                sol = mid;
-                l = mid+1;
-            }
-            if(nums[mid] < target){
-                l = mid+1;
-            }
-            if(nums[mid] > target){
-                r = mid-1;
-            }
+
+    int lowerBound(int[] a, int target){
+        int right = a.length-1;
+        int left = 0;
+        while(left < right){
+            int mid = left + (right - left)/2;
+            if(a[mid] < target)
+                left = mid + 1;
+            else right = mid;
         }
-        return sol;
+        return (left < a.length && a[left] == target) ? left : -1;
+    }
+
+    int upperBound(int[] a, int target){
+        int right = a.length-1;
+        int left = 0;
+        while(left < right){
+            int mid = left + (right - left + 1)/2;
+            if(a[mid] > target)
+                right = mid - 1;
+            else left = mid;
+        }
+        return (left < a.length && a[left] == target) ? left : -1;
     }
 }
